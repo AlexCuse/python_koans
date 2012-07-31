@@ -17,6 +17,12 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
+    sides = sorted([a, b, c])
+    #this seems weird bug can't index into a set?
+    unique_sides = list(set(sides))
+
+    if unique_sides[0] <= 0 : raise TriangleError('Sides must be 1 or longer')
+    if sides[2] >= sides[0] + sides[1] : raise TriangleError('Hypotenuse cannot be longer than the other two sides combined')
     if a == b and b == c:
     	return 'equilateral'
     elif a == b or b == c or a == c:
