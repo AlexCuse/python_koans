@@ -32,9 +32,21 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+def diceScorer(dice, v):
+    multipliers = [100, 0, 0, 0, 50, 0]
+    tripleBonusValues = [1000, None, None, None, None, None]
+    l = len([d for d in dice if d == v])
+    score = 0    
+    if l >= 3:
+        l = l - 3
+        if tripleBonusValues[v-1]:
+            score += tripleBonusValues[v - 1]
+        else:
+            score += v * 100
+    return score + (l * multipliers[v - 1])
+
 def score(dice):
-    # You need to write this method
-    pass
+    return sum(map(lambda v: diceScorer(dice, v), set(dice))) 
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
